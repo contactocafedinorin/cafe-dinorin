@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tienda web oficial de Cafe Dinorin - Café premium de 500g y 1kg">
+    <meta name="keywords" content="café, café premium, tienda de café, Cafe Dinorin">
+    <title>Cafe Dinorin - Tienda de Café Premium</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Encabezado -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">☕ Cafe Dinorin</div>
+            <nav class="nav">
+                <a href="#inicio" class="nav-link">Inicio</a>
+                <a href="#productos" class="nav-link">Productos</a>
+                <a href="#contacto" class="nav-link">Contacto</a>
+            </nav>
+            <button class="btn-carrito" onclick="toggleCarrito()">
+                🛒 Carrito <span id="cantidad-carrito" class="cantidad-badge">0</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Sección de Bienvenida -->
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <h1>Bienvenido a Cafe Dinorin</h1>
+            <p>Descubre el café premium de la más alta calidad</p>
+            <p class="hero-subtitle">Café 100% puro, tostado artesanalmente para ti</p>
+            <a href="#productos" class="btn btn-primary">Compra Ahora</a>
+        </div>
+        <div class="hero-image">
+            <div class="coffee-illustration">☕</div>
+        </div>
+    </section>
+
+    <!-- Carrito Lateral -->
+    <div id="carrito-sidebar" class="carrito-sidebar">
+        <div class="carrito-header">
+            <h2>Mi Carrito</h2>
+            <button class="btn-cerrar" onclick="toggleCarrito()">✕</button>
+        </div>
+        <div id="carrito-items" class="carrito-items">
+            <p class="carrito-vacio">Tu carrito está vacío</p>
+        </div>
+        <div class="carrito-total">
+            <span>Total:</span>
+            <span id="total-carrito">$0.00 MXN</span>
+        </div>
+        <button class="btn btn-primary btn-block" onclick="abrirFormulario()">Continuar Compra</button>
+    </div>
+
+    <!-- Overlay para carrito -->
+    <div id="overlay-carrito" class="overlay" onclick="toggleCarrito()"></div>
+
+    <!-- Sección de Productos -->
+    <section id="productos" class="productos">
+        <div class="container">
+            <h2 class="seccion-titulo">Nuestros Productos</h2>
+            <p class="seccion-subtitle">Selecciona la presentación que mejor se adapte a ti</p>
+
+            <div class="productos-grid">
+                <!-- Producto 1: 500g -->
+                <div class="producto-card">
+                    <div class="producto-imagen">
+                        <div class="imagen-placeholder">☕</div>
+                    </div>
+                    <div class="producto-info">
+                        <h3 class="producto-nombre">Café Dinorin 500g</h3>
+                        <p class="producto-descripcion">Presentación de 500 gramos de nuestro café premium, perfecto para una o dos semanas de uso diario.</p>
+                        <div class="producto-caracteristicas">
+                            <p>✓ 100% Puro</p>
+                            <p>✓ Tostado Artesanal</p>
+                            <p>✓ Envase Premium</p>
+                        </div>
+                        <div class="producto-footer">
+                            <span class="precio">$150 MXN</span>
+                            <button class="btn btn-secondary" onclick="agregarAlCarrito('Café 500g', 150, 'producto-1')">
+                                Añadir al Carrito
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Producto 2: 1kg -->
+                <div class="producto-card">
+                    <div class="producto-imagen">
+                        <div class="imagen-placeholder">☕</div>
+                    </div>
+                    <div class="producto-info">
+                        <h3 class="producto-nombre">Café Dinorin 1 kg</h3>
+                        <p class="producto-descripcion">Presentación de 1 kilogramo de nuestro café premium, ideal para familias y disfrutar durante todo el mes.</p>
+                        <div class="producto-caracteristicas">
+                            <p>✓ 100% Puro</p>
+                            <p>✓ Tostado Artesanal</p>
+                            <p>✓ Envase Premium</p>
+                        </div>
+                        <div class="producto-footer">
+                            <span class="precio">$300 MXN</span>
+                            <button class="btn btn-secondary" onclick="agregarAlCarrito('Café 1kg', 300, 'producto-2')">
+                                Añadir al Carrito
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Formulario de Pedido (Modal) -->
+    <div id="modal-formulario" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Formulario de Pedido</h2>
+                <button class="btn-cerrar" onclick="cerrarFormulario()">✕</button>
+            </div>
+
+            <form id="formulario-pedido" class="formulario-pedido">
+                <div class="form-group">
+                    <label for="nombre">Nombre Completo *</label>
+                    <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre completo">
+                </div>
+
+                <div class="form-group">
+                    <label for="telefono">Teléfono *</label>
+                    <input type="tel" id="telefono" name="telefono" required placeholder="Tu número de teléfono">
+                </div>
+
+                <div class="form-group">
+                    <label for="direccion">Dirección *</label>
+                    <textarea id="direccion" name="direccion" required placeholder="Calle, número, apartamento, ciudad, estado, código postal" rows="4"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email (Opcional)</label>
+                    <input type="email" id="email" name="email" placeholder="tu@email.com">
+                </div>
+
+                <div class="resumen-compra">
+                    <h3>Resumen de Compra</h3>
+                    <div id="resumen-items"></div>
+                    <div class="resumen-total">
+                        <strong>Total:</strong>
+                        <strong id="total-resumen">$0.00 MXN</strong>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">Enviar Pedido</button>
+                <button type="button" class="btn btn-outline btn-block" onclick="cerrarFormulario()">Cancelar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Overlay para modal -->
+    <div id="overlay-modal" class="overlay" onclick="cerrarFormulario()"></div>
+
+    <!-- Sección de Contacto -->
+    <section id="contacto" class="contacto">
+        <div class="container">
+            <h2 class="seccion-titulo">Contacto</h2>
+            <div class="contacto-grid">
+                <div class="contacto-card">
+                    <h3>📧 Email</h3>
+                    <p><a href="mailto:contacto@cafedinorin.com">contacto@cafedinorin.com</a></p>
+                </div>
+                <div class="contacto-card">
+                    <h3>📱 Teléfono</h3>
+                    <p><a href="tel:+525511223344">+52 (55) 1122-3344</a></p>
+                </div>
+                <div class="contacto-card">
+                    <h3>📍 Ubicación</h3>
+                    <p>Ciudad de México, México</p>
+                </div>
+                <div class="contacto-card">
+                    <h3>🌐 Redes Sociales</h3>
+                    <p>
+                        <a href="https://instagram.com/cafedinorin" target="_blank">Instagram</a> | 
+                        <a href="https://facebook.com/cafedinorin" target="_blank">Facebook</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pie de Página -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Cafe Dinorin</h3>
+                    <p>Tu tienda de café premium de confianza desde 2024.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="#inicio">Inicio</a></li>
+                        <li><a href="#productos">Productos</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Políticas</h3>
+                    <ul>
+                        <li><a href="#">Términos y Condiciones</a></li>
+                        <li><a href="#">Política de Privacidad</a></li>
+                        <li><a href="#">Política de Devoluciones</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Cafe Dinorin. Todos los derechos reservados.</p>
+                <p>Hecho con ☕ y amor | <a href="https://github.com/contactocafedinorin/cafe-dinorin" target="_blank">GitHub</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
